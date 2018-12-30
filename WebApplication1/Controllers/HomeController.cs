@@ -55,7 +55,7 @@ namespace WebApplication1.Controllers
         public IActionResult Result(ResultViewModel resultViewModel)
 
         {
-            if (ModelState.IsValid)
+            if ((ModelState.IsValid) & (resultViewModel.Sidelength > 0))
             {
 
                 List<Shape> TheList = context.Shapes.ToList();
@@ -216,7 +216,8 @@ namespace WebApplication1.Controllers
 
         {
             List<Shape> TheList = context.Shapes.ToList();
-            if (ModelState.IsValid)
+
+            if ((ModelState.IsValid) & (editItemViewModel.NewElement2 > 0))
 
             {
 
