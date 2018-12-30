@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewData["Title"] = "SearchResult";
+}
+
+<h2>Search Result</h2>
+
+<br />
+
+
+@foreach (Shape item in ViewBag.Anslist)
+
+
+
+{
+    <p>@item.Name : @item.Sidelength</p>
+
+}
+

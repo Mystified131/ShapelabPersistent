@@ -1,0 +1,19 @@
+﻿
+@model WebApplication1.ViewModels.EditItemViewModel
+
+@{
+    ViewData["Title"] = "Edit Item";
+}
+
+<h2>Edit</h2>
+
+<form action='EditItem' method='POST' align="left">
+    <label>
+        Please enter an new sidelength for this item's shape (@ViewBag.Name : @ViewBag.Sidelength):
+    </label><br><br>
+    <input name="NewElement2" type="text" default=@ViewBag.Sidelength value=@ViewBag.Sidelength />
+    <br /><br />
+    <input type="submit" value="Edit Item" />
+
+</form>
+

@@ -1,0 +1,27 @@
+﻿@model WebApplication1.ViewModels.RemoveViewModel
+
+@{
+    ViewData["Title"] = "Remove";
+}
+
+<h2>Remove</h2>
+
+<div>
+    <form action='Remove' method='POST' align="left">
+        <label>
+            Which shape would you like to delete from the list?
+        </label><br><br />
+        <select name="RemshapeID">
+            @foreach (var shape in Model.TheList)
+            {
+                <option value="@shape.ID">
+                    @shape.Name : @shape.Sidelength
+                </option>
+            }
+        </select>
+
+
+        <br /><br />
+        <input type="submit" value="Remove Item" />
+    </form>
+</div>

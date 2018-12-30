@@ -1,0 +1,27 @@
+﻿@model WebApplication1.ViewModels.IndexViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Add</h2>
+
+<form action='Home/Result' method='POST' align="left">
+    <div>
+        <label>
+            Would you like to add a segment, square or cube?
+        </label><br><br />
+        <input type="radio" name="Shapetype" value="Segment">Segment<br>
+        <input type="radio" name="Shapetype" value="Square">Square<br>
+        <input type="radio" name="Shapetype" value="Cube" checked="checked">Cube<br>
+    </div>
+    <br /><br />
+
+    <label>
+        Please enter a sidelength of the shape:
+    </label><br><br>
+    <input name="Sidelength" type="text" value="" />
+    <br /><br />
+    <input type="submit" value="Calculate Results" />
+
+</form>

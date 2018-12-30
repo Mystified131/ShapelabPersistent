@@ -1,0 +1,18 @@
+﻿@model WebApplication1.ViewModels.SearchSelectViewModel
+
+@{
+    ViewData["Title"] = "Search Select";
+}
+
+<h2>Search</h2>
+
+<form action='SearchSelect' method='POST' align="left">
+    <label>
+        Please enter an string for which to search shape names:
+    </label><br><br>
+    <input name="Searchstr" type="text" value="" />
+    <br /><br />
+    <input type="submit" value="Choose Search" />
+
+</form>
+

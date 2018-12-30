@@ -1,0 +1,55 @@
+﻿
+@model WebApplication1.ViewModels.ResultViewModel
+
+@{
+    ViewData["Title"] = "Result";
+}
+
+<h2>Result</h2>
+
+<br />
+
+@if (@Model.Volume != 0)
+{
+
+    <p>The volume of the cube would be: @Model.Volume</p>
+
+}
+
+<br />
+
+@if (@Model.Surfacearea != 0)
+{
+
+    <p>The surface area of the cube would be: @Model.Surfacearea</p>
+
+}
+
+@if (@Model.Area != 0)
+{
+
+    <p>The area of the square would be: @Model.Area</p>
+
+}
+
+@if (@Model.Perimeter != 0)
+{
+
+    <p>The perimeter of the square would be: @Model.Perimeter</p>
+
+}
+
+<p>@Model.Error</p><br />
+
+<br />
+
+<h4>List Of Shapes:</h4>
+@foreach (var shape in Model.Shapelist)
+{
+
+    <p>@shape.Name : @shape.Sidelength</p>
+
+}
+
+
+

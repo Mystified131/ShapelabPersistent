@@ -1,0 +1,18 @@
+﻿@model WebApplication1.ViewModels.SortViewModel
+
+@{
+    ViewData["Title"] = "Sort";
+}
+
+<h2>Sorted</h2>
+
+<br />
+
+
+@foreach (Shape item in Model.Sortlist)
+
+{
+    <p>@item.Name  : @item.Sidelength</p>
+
+
+}

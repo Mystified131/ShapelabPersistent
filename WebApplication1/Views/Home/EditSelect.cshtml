@@ -1,0 +1,28 @@
+﻿@model WebApplication1.ViewModels.EditSelectViewModel
+
+@{
+    ViewData["Title"] = "Edit Select";
+}
+
+<h2>Choose Item To Edit</h2>
+
+<div>
+    <form action='EditSelect' method='POST' align="left">
+        <label>
+            Which shape would you like to edit from the list?
+        </label><br><br />
+        <select name="EditshapeID">
+            @foreach (var shape in Model.TheList)
+            {
+                <option value="@shape.ID">
+                    @shape.Name : @shape.Sidelength
+                </option>
+            }
+        </select>
+
+
+        <br /><br />
+        <input type="submit" value="Edit Item" />
+    </form>
+</div>
+
