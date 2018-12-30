@@ -1,0 +1,19 @@
+﻿@model WebApplication1.ViewModels.CatalogViewModel
+
+@{
+    ViewData["Title"] = "Catalog";
+}
+
+<h2>Catalog Of Shapes</h2>
+
+<br />
+
+@foreach (var shape in Model.TheList)
+{
+
+    <p>@shape.Name : @shape.Sidelength</p>
+
+}
+
+
+

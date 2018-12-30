@@ -1,0 +1,28 @@
+﻿@model WebApplication1.ViewModels.CalculateViewModel
+
+@{
+    ViewData["Title"] = "Calculate";
+}
+
+<h2>Choose Item To Calculate</h2>
+
+<div>
+    <form action='Result' method='POST' align="left">
+        <label>
+            Which shape would you like analyze from the list?
+        </label><br><br />
+        <select name="CalcshapeID">
+            @foreach (var shape in Model.TheList)
+            {
+            <option value="@shape.ID">
+                @shape.Name : @shape.Sidelength
+            </option>
+            }
+        </select>
+
+
+        <br /><br />
+        <input type="submit" value="Analyze Item" />
+    </form>
+</div>
+

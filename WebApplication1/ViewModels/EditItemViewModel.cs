@@ -8,7 +8,6 @@ namespace WebApplication1.ViewModels
 {
     public class EditItemViewModel
     {
-        public Shape Delshape { get; set; }
         public double NewElement2 { get; set; }
     }
 }

@@ -9,47 +9,40 @@
 
 <br />
 
-@if (@Model.Volume != 0)
+@if (@ViewBag.Volume > 0)
 {
 
-    <p>The volume of the cube would be: @Model.Volume</p>
+    <p>The volume of the cube would be: @ViewBag.Volume</p>
 
 }
 
-<br />
 
-@if (@Model.Surfacearea != 0)
+@if (@ViewBag.Surfacearea > 0)
 {
 
-    <p>The surface area of the cube would be: @Model.Surfacearea</p>
+    <p>The surface area of the cube would be: @ViewBag.Surfacearea</p>
 
 }
 
-@if (@Model.Area != 0)
+@if (@ViewBag.Area > 0)
 {
 
-    <p>The area of the square would be: @Model.Area</p>
+    <p>The area of the square would be: @ViewBag.Area</p>
 
 }
 
-@if (@Model.Perimeter != 0)
+@if (@ViewBag.Perimeter > 0)
 {
 
-    <p>The perimeter of the square would be: @Model.Perimeter</p>
+    <p>The perimeter of the square would be: @ViewBag.Perimeter</p>
 
 }
+
+<p>@ViewBag.Error</p><br />
 
 <p>@Model.Error</p><br />
 
-<br />
 
-<h4>List Of Shapes:</h4>
-@foreach (var shape in Model.Shapelist)
-{
-
-    <p>@shape.Name : @shape.Sidelength</p>
-
-}
 
 
 

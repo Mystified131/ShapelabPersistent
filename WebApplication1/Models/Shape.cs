@@ -19,15 +19,6 @@ namespace WebApplication1.Models
             Sidelength = sidelength;
         }
 
-    }
-
-    public class Cube : Shape
-    {
-
-
-        public Cube(string Name, double Sidelength) : base(Name, Sidelength) { }
-
-
         public double Volume(double Sidelength)
         {
 
@@ -45,13 +36,6 @@ namespace WebApplication1.Models
             return Sar;
 
         }
-    }
-
-    public class Square : Shape
-    {
-
-
-        public Square(string Name, double Sidelength) : base(Name, Sidelength) { }
 
         public double Perimeter(double Sidelength)
         {
@@ -72,9 +56,26 @@ namespace WebApplication1.Models
         }
     }
 
+    public class Cube : Shape
+    {
+
+        public Cube(string Name, double Sidelength) : base(Name, Sidelength) { }
+
+    }
+
+    public class Square : Shape
+    {
+
+
+        public Square(string Name, double Sidelength) : base(Name, Sidelength) { }
+
+       
+    }
+
     public class Segment : Shape
     {
 
         public Segment(string Name, double Sidelength) : base(Name, Sidelength) { }
     }
+
 }

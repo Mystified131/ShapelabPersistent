@@ -7,9 +7,12 @@ using WebApplication1.Models;
 
 namespace WebApplication1.ViewModels
 {
-    public class ResultViewModel
+    public class CatalogViewModel
     {
-        public int CalcshapeID { get; set; }
-        public String Error { get; set; }
+        [Required]
+        public string Shapetype { get; set; }
+        [Required]
+        public double Sidelength { get; set; }
+        public List<Shape> TheList { get; set; }
     }
 }

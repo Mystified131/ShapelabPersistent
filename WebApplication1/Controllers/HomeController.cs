@@ -40,157 +40,225 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        public IActionResult Result()
+        public IActionResult Catalog()
         {
-            ResultViewModel resultViewModel = new ResultViewModel();
-
-            resultViewModel.Error = "To add a new shape, please return to the 'Add' page.";
+            CatalogViewModel catalogViewModel = new CatalogViewModel();
 
             List<Shape> TheList = context.Shapes.ToList();
-            resultViewModel.Shapelist = TheList;
+            catalogViewModel.TheList = TheList;
 
-            return View(resultViewModel);
+            return View(catalogViewModel);
         }
 
         [HttpPost]
-        public IActionResult Result(ResultViewModel resultViewModel)
+        public IActionResult Catalog(CatalogViewModel catalogViewModel)
 
         {
-            if ((ModelState.IsValid) & (resultViewModel.Sidelength > 0))
+            if ((ModelState.IsValid) & (catalogViewModel.Sidelength > 0))
             {
 
                 List<Shape> TheList = context.Shapes.ToList();
 
-                if (resultViewModel.Shapetype == "Cube")
+                if (catalogViewModel.Shapetype == "Cube")
                 {
 
-                    Cube Cube = new Cube("Cube", resultViewModel.Sidelength);
-
-                    resultViewModel.Volume = Cube.Volume(resultViewModel.Sidelength);
-                    resultViewModel.Surfacearea = Cube.Surfacearea(resultViewModel.Sidelength);
+                    Cube Cube = new Cube("Cube", catalogViewModel.Sidelength);
 
                     context.Shapes.Add(Cube);
                     TheList.Add(Cube);
 
                 }
 
-                if (resultViewModel.Shapetype == "Square")
+                if (catalogViewModel.Shapetype == "Square")
                 {
 
-                    Square Square = new Square("Square", resultViewModel.Sidelength);
+                    Square Square = new Square("Square", catalogViewModel.Sidelength);
 
-                    resultViewModel.Perimeter = Square.Perimeter(resultViewModel.Sidelength);
-                    resultViewModel.Area = Square.Area(resultViewModel.Sidelength);
                     context.Shapes.Add(Square);
                     TheList.Add(Square);
 
                 }
 
-                if (resultViewModel.Shapetype == "Segment")
+                if (catalogViewModel.Shapetype == "Segment")
                 {
 
-                    Segment Segment = new Segment("Segment", resultViewModel.Sidelength);
+                    Segment Segment = new Segment("Segment", catalogViewModel.Sidelength);
+
                     context.Shapes.Add(Segment);
                     TheList.Add(Segment);
 
                 }
 
                 context.SaveChanges();
-                resultViewModel.Shapelist = TheList;
+                catalogViewModel.TheList = TheList;
+
+                return View(catalogViewModel);
+
+
+            }
+
+
+            return Redirect("/Home/Error");
+
+        }
+
+
+        public IActionResult Result()
+        {
+            ResultViewModel resultViewModel = new ResultViewModel();
+
+            resultViewModel.Error = "To add a new shape, please return to the 'Add' page.";
+
+            return View(resultViewModel);
+        }
+
+
+        [HttpPost]
+        public IActionResult Result(ResultViewModel resultViewModel)
+        {
+            List<Shape> TheList = context.Shapes.ToList();
+            if (ModelState.IsValid)
+            {
+                Shape calcshape = context.Shapes.Single(c => c.ID == resultViewModel.CalcshapeID);
+
+                if (calcshape.Name == "Cube") {
+
+
+                ViewBag.Volume = calcshape.Volume(calcshape.Sidelength);
+                ViewBag.Surfacearea = calcshape.Surfacearea(calcshape.Sidelength);
+
+                 }
+
+                if (calcshape.Name == "Square")
+
+                { 
+
+                ViewBag.Area = calcshape.Area(calcshape.Sidelength);
+                ViewBag.Perimeter = calcshape.Perimeter(calcshape.Sidelength);
+
+                }
+
+                if (calcshape.Name == "Segment")
+
+                {
+
+                    ViewBag.Error = "There are no calculations for a segment.");
+
+                }
 
                 return View(resultViewModel);
 
-
             }
 
 
             return Redirect("/Home/Error");
 
+
         }
 
-        [HttpGet]
-        public IActionResult Remove()
+
+    [HttpGet]
+    public IActionResult Remove()
+    {
+        List<Shape> TheList = context.Shapes.ToList();
+        if (TheList.Count > 0)
         {
-            List<Shape> TheList = context.Shapes.ToList();
-            if (TheList.Count > 0)
-            {
-                RemoveViewModel removeViewModel = new RemoveViewModel();
+            RemoveViewModel removeViewModel = new RemoveViewModel();
 
-                removeViewModel.TheList = TheList;
+            removeViewModel.TheList = TheList;
 
-                return View(removeViewModel);
-            }
-
-            else
-            {
-                return Redirect("/");
-            }
+            return View(removeViewModel);
         }
 
-        [HttpPost]
-        public IActionResult Remove(RemoveViewModel removeViewModel)
-
+        else
         {
-            List<Shape> TheList = context.Shapes.ToList();
-
-            if (ModelState.IsValid)
-            {
-
-                TheList.RemoveAll(x => x.ID == removeViewModel.RemshapeID);
-                Shape remshape = context.Shapes.Single(c => c.ID == removeViewModel.RemshapeID);
-                context.Shapes.Remove(remshape);
-                context.SaveChanges();
-
-                Remlist.Clear();
-
-                return Redirect("/Home/Result");
-            }
-
-            return Redirect("/Home/Error");
-
+            return Redirect("/");
         }
+    }
 
-        [HttpGet]
-        public IActionResult EditSelect()
+    [HttpPost]
+    public IActionResult Remove(RemoveViewModel removeViewModel)
+
+    {
+        List<Shape> TheList = context.Shapes.ToList();
+
+        if (ModelState.IsValid)
         {
-            List<Shape> TheList = context.Shapes.ToList();
-            if (TheList.Count > 0)
-            {
-                EditSelectViewModel editSelectViewModel = new EditSelectViewModel();
 
-                editSelectViewModel.TheList = TheList;
+            TheList.RemoveAll(x => x.ID == removeViewModel.RemshapeID);
+            Shape remshape = context.Shapes.Single(c => c.ID == removeViewModel.RemshapeID);
+            context.Shapes.Remove(remshape);
+            context.SaveChanges();
 
-                return View(editSelectViewModel);
-            }
+            Remlist.Clear();
 
-            else
-            {
-                return Redirect("/");
-            }
+            return Redirect("/Home/Catalog");
         }
 
+        return Redirect("/Home/Error");
 
-        [HttpPost]
-        public IActionResult EditSelect(EditSelectViewModel editSelectViewModel)
+    }
+
+    [HttpGet]
+    public IActionResult EditSelect()
+    {
+        List<Shape> TheList = context.Shapes.ToList();
+        if (TheList.Count > 0)
         {
-            List<Shape> TheList = context.Shapes.ToList();
-            if (ModelState.IsValid)
-            {
-                Shape editshape = context.Shapes.Single(c => c.ID == editSelectViewModel.EditshapeID);
-                editID = editSelectViewModel.EditshapeID;
-                editname = editshape.Name;
-                editsidelength = editshape.Sidelength;
-                context.SaveChanges();
-               
+            EditSelectViewModel editSelectViewModel = new EditSelectViewModel();
 
-                return Redirect("/Home/EditItem");
-            }
+            editSelectViewModel.TheList = TheList;
 
-            return Redirect("/Home/Error");
-
+            return View(editSelectViewModel);
         }
 
+        else
+        {
+            return Redirect("/");
+        }
+    }
 
+
+    [HttpPost]
+    public IActionResult EditSelect(EditSelectViewModel editSelectViewModel)
+    {
+        List<Shape> TheList = context.Shapes.ToList();
+        if (ModelState.IsValid)
+        {
+            Shape editshape = context.Shapes.Single(c => c.ID == editSelectViewModel.EditshapeID);
+            editID = editSelectViewModel.EditshapeID;
+            editname = editshape.Name;
+            editsidelength = editshape.Sidelength;
+            context.SaveChanges();
+
+
+            return Redirect("/Home/EditItem");
+        }
+
+        return Redirect("/Home/Error");
+
+    }
+
+
+    [HttpGet]
+    public IActionResult Calculate()
+    {
+        List<Shape> TheList = context.Shapes.ToList();
+        if (TheList.Count > 0)
+        {
+            CalculateViewModel calculateViewModel = new CalculateViewModel();
+
+            calculateViewModel.TheList = TheList;
+
+            return View(calculateViewModel);
+        }
+
+        else
+        {
+            return Redirect("/");
+        }
+    }
+            
 
         [HttpGet]
         public IActionResult EditItem()
@@ -225,7 +293,7 @@ namespace WebApplication1.Controllers
                 editshape.Sidelength = editItemViewModel.NewElement2;
                 context.SaveChanges();
                 
-                return Redirect("/Home/Result");
+                return Redirect("/Home/Catalog");
             }
             
             return Redirect("/Home/Error");
