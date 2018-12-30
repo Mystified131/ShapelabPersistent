@@ -10,7 +10,7 @@ namespace WebApplication1.ViewModels
     public class RemoveViewModel
     {
         [Required]
-        public double RemshapeID { get; set; }
+        public int RemshapeID { get; set; }
         public List<Shape> TheList { get; set; }
     }
 }

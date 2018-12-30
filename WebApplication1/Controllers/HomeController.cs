@@ -14,6 +14,7 @@ namespace WebApplication1.Controllers
     {
         public static List<Shape> Remlist = new List<Shape>();
         public static List<Shape> Editlist = new List<Shape>();
+        public static int editID;
         public static string editname;
         public static double editsidelength;
         public static string Searchstr;
@@ -176,9 +177,9 @@ namespace WebApplication1.Controllers
             if (ModelState.IsValid)
             {
                 Shape editshape = context.Shapes.Single(c => c.ID == editSelectViewModel.EditshapeID);
+                editID = editSelectViewModel.EditshapeID;
                 editname = editshape.Name;
                 editsidelength = editshape.Sidelength;
-                context.Shapes.Remove(editshape);
                 context.SaveChanges();
                
 
@@ -220,66 +221,13 @@ namespace WebApplication1.Controllers
             if ((ModelState.IsValid) & (editItemViewModel.NewElement2 > 0))
 
             {
-
-                if (editname == "Cube")
-                {
-
-                    Cube Cube = new Cube("Cube", editItemViewModel.NewElement2);
-                    context.Shapes.Add(Cube);
-                    TheList.Add(Cube);
-
-                }
-
-                if (editname == "Square")
-                {
-
-                    Square Square = new Square("Square", editItemViewModel.NewElement2);
-                    context.Shapes.Add(Square);
-                    TheList.Add(Square);
-
-                }
-
-                if (editname == "Segment")
-                {
-
-                    Segment Segment = new Segment("Segment", editItemViewModel.NewElement2);
-                    context.Shapes.Add(Segment);
-                    TheList.Add(Segment);
-
-                }
-
+                Shape editshape = context.Shapes.Single(c => c.ID == editID);
+                editshape.Sidelength = editItemViewModel.NewElement2;
                 context.SaveChanges();
+                
                 return Redirect("/Home/Result");
             }
-
-            if (editname == "Cube")
-            {
-
-                Cube Cube = new Cube("Cube", editsidelength);
-                context.Shapes.Add(Cube);
-                TheList.Add(Cube);
-
-            }
-
-            if (editname == "Square")
-            {
-
-                Square Square = new Square("Square", editsidelength);
-                context.Shapes.Add(Square);
-                TheList.Add(Square);
-
-            }
-
-            if (editname == "Segment")
-            {
-
-                Segment Segment = new Segment("Segment", editsidelength);
-                context.Shapes.Add(Segment);
-                TheList.Add(Segment);
-
-            }
-
-            context.SaveChanges();
+            
             return Redirect("/Home/Error");
 
         }

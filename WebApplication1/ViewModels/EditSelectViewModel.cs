@@ -10,7 +10,7 @@ namespace WebApplication1.ViewModels
     public class EditSelectViewModel
     {
         [Required]
-        public double EditshapeID { get; set; }
+        public int EditshapeID { get; set; }
         public List<Shape> TheList { get; set; }
     }
 }
