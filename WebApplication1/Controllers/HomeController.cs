@@ -107,7 +107,7 @@ namespace WebApplication1.Controllers
         {
             ResultViewModel resultViewModel = new ResultViewModel();
 
-            resultViewModel.Error = "To add a new shape, please return to the 'Add' page.";
+            resultViewModel.Error = "To see results, please visit the 'Calculate' page.";
 
             return View(resultViewModel);
         }
