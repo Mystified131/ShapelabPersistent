@@ -142,7 +142,7 @@ namespace WebApplication1.Controllers
 
                 {
 
-                    ViewBag.Error = "There are no calculations for a segment.");
+                ViewBag.Error = "There are no calculations for a segment.";
 
                 }
 
