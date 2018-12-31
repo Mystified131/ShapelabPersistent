@@ -455,6 +455,29 @@ namespace WebApplication1.Controllers
 
         }
 
+        public IActionResult Random()
+        {
+            
+            List<Shape> TheList = context.Shapes.ToList();
+            if (TheList.Count > 0) { 
+
+            RandomViewModel randomViewModel = new RandomViewModel();
+
+                int Shapecont = TheList.Count();
+                Random random = new Random();
+                int Shapeind = random.Next(0, Shapecont);
+                Shape Ranshape = TheList[Shapeind];
+
+                randomViewModel.Ranshape = Ranshape;
+
+                return View(randomViewModel);
+            }
+
+            else
+            {
+                return Redirect("/");
+            }
+        }
     }
 
 }
