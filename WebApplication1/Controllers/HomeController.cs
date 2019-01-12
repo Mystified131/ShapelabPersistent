@@ -126,8 +126,9 @@ namespace WebApplication1.Controllers
 
                 ViewBag.Volume = calcshape.Volume(calcshape.Sidelength);
                 ViewBag.Surfacearea = calcshape.Surfacearea(calcshape.Sidelength);
+                ViewBag.Onesidearea = calcshape.Onesidearea(calcshape.Sidelength);
 
-                 }
+                }
 
                 if (calcshape.Name == "Square")
 

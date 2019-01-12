@@ -37,6 +37,15 @@ namespace WebApplication1.Models
 
         }
 
+        public double Onesidearea(double Sidelength)
+        {
+
+            double Osa = Sidelength * Sidelength;
+
+            return Osa;
+
+        }
+
         public double Perimeter(double Sidelength)
         {
 
