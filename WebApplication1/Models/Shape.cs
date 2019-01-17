@@ -12,6 +12,7 @@ namespace WebApplication1.Models
         public string Name { get; set; }
         public double Sidelength { get; set; }
 
+        public bool Done { get; set; }
 
         public Shape(string name, double sidelength)
         {
@@ -87,4 +88,7 @@ namespace WebApplication1.Models
         public Segment(string Name, double Sidelength) : base(Name, Sidelength) { }
     }
 
+    
 }
+
+

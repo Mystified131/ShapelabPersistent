@@ -54,10 +54,46 @@ namespace WebApplication1.Controllers
         public IActionResult Catalog(CatalogViewModel catalogViewModel)
 
         {
+            if ((ModelState.IsValid) & (catalogViewModel.Sidelength == 0))
+
+            { 
+                Random random = new Random();
+                catalogViewModel.Sidelength = random.Next(0, 1000);
+
+            }
+
             if ((ModelState.IsValid) & (catalogViewModel.Sidelength > 0))
             {
 
                 List<Shape> TheList = context.Shapes.ToList();
+
+                if(catalogViewModel.Shapetype == "Random")
+                {
+                    Random random = new Random();
+                    int Shapetyp = random.Next(0, 3);
+
+                    if(Shapetyp == 0)
+                    {
+
+                        catalogViewModel.Shapetype = "Segment";
+
+                    }
+
+                    if(Shapetyp == 1)
+                    {
+
+                        catalogViewModel.Shapetype = "Square";
+
+                    }
+
+                    if(Shapetyp == 2)
+                    {
+
+                        catalogViewModel.Shapetype = "Cube";
+
+                    }
+
+                }
 
                 if (catalogViewModel.Shapetype == "Cube")
                 {
