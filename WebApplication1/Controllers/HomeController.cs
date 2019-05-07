@@ -515,6 +515,26 @@ namespace WebApplication1.Controllers
                 return Redirect("/");
             }
         }
-    }
+
+        public IActionResult Delete()
+        {
+            CatalogViewModel catalogViewModel = new CatalogViewModel();
+
+            List<Shape> TheList = context.Shapes.ToList();
+
+            foreach (Shape itm in TheList)
+            {
+                context.Shapes.Remove(itm);
+
+            }
+
+            context.SaveChanges();
+            return Redirect("/Home/Catalog");
+
+        }
+
+
+        }
+
 
 }
